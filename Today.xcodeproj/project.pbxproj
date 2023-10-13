@@ -29,6 +29,7 @@
 		B56BEB302AD9505B0069E29E /* TextFieldContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */; };
 		B56BEB322AD952300069E29E /* UIContentConfiguration+Stateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */; };
 		B56BEB342AD97FAC0069E29E /* TextViewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */; };
+		B56BEB362AD9827A0069E29E /* DatePickerContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB352AD9827A0069E29E /* DatePickerContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldContentView.swift; sourceTree = "<group>"; };
 		B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContentConfiguration+Stateless.swift"; sourceTree = "<group>"; };
 		B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewContentView.swift; sourceTree = "<group>"; };
+		B56BEB352AD9827A0069E29E /* DatePickerContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,6 +196,7 @@
 				B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */,
 				B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */,
 				B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */,
+				B56BEB352AD9827A0069E29E /* DatePickerContentView.swift */,
 			);
 			path = ContentViews;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B56BEB2B2AD944F10069E29E /* ReminderViewController+CellConfiguration.swift in Sources */,
+				B56BEB362AD9827A0069E29E /* DatePickerContentView.swift in Sources */,
 				B56AECEF2AD6F955004B555A /* ReminderListViewController+Actions.swift in Sources */,
 				B56AECB82AD6EAC0004B555A /* ReminderListViewController.swift in Sources */,
 				B56AECE72AD6F1BF004B555A /* Date+Today.swift in Sources */,
