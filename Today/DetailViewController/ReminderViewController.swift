@@ -1,10 +1,3 @@
-//
-//  ReminderViewController.swift
-//  Today
-//
-//  Created by Jessica Soares on 12/10/2023.
-//
-
 import UIKit
 
 
@@ -51,15 +44,16 @@ class ReminderViewController: UICollectionViewController {
 
         updateSnapshotForViewing()
     }
-    
+
+
     override func setEditing(_ editing: Bool, animated: Bool) {
-            super.setEditing(editing, animated: animated)
+        super.setEditing(editing, animated: animated)
         if editing {
-                    updateSnapshotForEditing()
-                } else {
-                    updateSnapshotForViewing()
-                }
+            updateSnapshotForEditing()
+        } else {
+            updateSnapshotForViewing()
         }
+    }
 
 
     func cellRegistrationHandler(cell: UICollectionViewListCell, indexPath: IndexPath, row: Row) {
@@ -69,6 +63,8 @@ class ReminderViewController: UICollectionViewController {
             cell.contentConfiguration = headerConfiguration(for: cell, with: title)
         case (.view, _):
             cell.contentConfiguration = defaultConfiguration(for: cell, at: row)
+        case (.title, .editableText(let title)):
+            cell.contentConfiguration = titleConfiguration(for: cell, with: title)
         default:
             fatalError("Unexpected combination of section and row.")
         }
@@ -76,21 +72,11 @@ class ReminderViewController: UICollectionViewController {
     }
 
 
-    func text(for row: Row) -> String? {
-        switch row {
-        case .date: return reminder.dueDate.dayText
-        case .notes: return reminder.notes
-        case .time: return reminder.dueDate.formatted(date: .omitted, time: .shortened)
-        case .title: return reminder.title
-        default: return nil
-        }
-    }
-
-
     private func updateSnapshotForEditing() {
         var snapshot = Snapshot()
         snapshot.appendSections([.title, .date, .notes])
-        snapshot.appendItems([.header(Section.title.name)], toSection: .title)
+        snapshot.appendItems(
+            [.header(Section.title.name), .editableText(reminder.title)], toSection: .title)
         snapshot.appendItems([.header(Section.date.name)], toSection: .date)
         snapshot.appendItems([.header(Section.notes.name)], toSection: .notes)
         dataSource.apply(snapshot)
@@ -100,7 +86,8 @@ class ReminderViewController: UICollectionViewController {
     private func updateSnapshotForViewing() {
         var snapshot = Snapshot()
         snapshot.appendSections([.view])
-        snapshot.appendItems([Row.header(""), Row.title, Row.date, Row.time, Row.notes], toSection: .view)
+        snapshot.appendItems(
+            [Row.header(""), Row.title, Row.date, Row.time, Row.notes], toSection: .view)
         dataSource.apply(snapshot)
     }
 

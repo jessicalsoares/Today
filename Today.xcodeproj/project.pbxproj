@@ -28,6 +28,7 @@
 		B56BEB2E2AD94D650069E29E /* UIView+PinnedSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB2D2AD94D650069E29E /* UIView+PinnedSubview.swift */; };
 		B56BEB302AD9505B0069E29E /* TextFieldContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */; };
 		B56BEB322AD952300069E29E /* UIContentConfiguration+Stateless.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */; };
+		B56BEB342AD97FAC0069E29E /* TextViewContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		B56BEB2D2AD94D650069E29E /* UIView+PinnedSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+PinnedSubview.swift"; sourceTree = "<group>"; };
 		B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldContentView.swift; sourceTree = "<group>"; };
 		B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIContentConfiguration+Stateless.swift"; sourceTree = "<group>"; };
+		B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewContentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				B56BEB2D2AD94D650069E29E /* UIView+PinnedSubview.swift */,
 				B56BEB2F2AD9505B0069E29E /* TextFieldContentView.swift */,
 				B56BEB312AD952300069E29E /* UIContentConfiguration+Stateless.swift */,
+				B56BEB332AD97FAC0069E29E /* TextViewContentView.swift */,
 			);
 			path = ContentViews;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				B56AECB62AD6EAC0004B555A /* SceneDelegate.swift in Sources */,
 				B55517042AD8371800D54866 /* ReminderViewController.swift in Sources */,
 				B56BEB2E2AD94D650069E29E /* UIView+PinnedSubview.swift in Sources */,
+				B56BEB342AD97FAC0069E29E /* TextViewContentView.swift in Sources */,
 				B55517072AD8391700D54866 /* ReminderViewController+Row.swift in Sources */,
 				B56AECE52AD6EF05004B555A /* Reminder.swift in Sources */,
 				B56AECED2AD6F8ED004B555A /* ReminderDoneButton.swift in Sources */,
