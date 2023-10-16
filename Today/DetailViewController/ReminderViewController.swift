@@ -4,13 +4,20 @@ class ReminderViewController: UICollectionViewController {
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, Row>
     private typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Row>
 
-    var reminder: Reminder
+    var reminder: Reminder {
+        didSet {
+            onChange(reminder)
+        }
+    }
     var workingReminder: Reminder
+    var isAddingNewReminder = false
+    var onChange: (Reminder) -> Void
     private var dataSource: DataSource!
 
-    init(reminder: Reminder) {
+    init(reminder: Reminder, onChange: @escaping (Reminder) -> Void) {
         self.reminder = reminder
         self.workingReminder = reminder
+        self.onChange = onChange
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         listConfiguration.showsSeparators = false
         listConfiguration.headerMode = .firstItemInSection
@@ -45,34 +52,43 @@ class ReminderViewController: UICollectionViewController {
         if editing {
             prepareForEditing()
         } else {
-            prepareForViewing()
+            if isAddingNewReminder {
+                onChange(workingReminder)
+            } else {
+                prepareForViewing()
+            }
         }
     }
 
     func cellRegistrationHandler(cell: UICollectionViewListCell, indexPath: IndexPath, row: Row) {
-            let section = section(for: indexPath)
-            switch (section, row) {
-            case (_, .header(let title)):
-                cell.contentConfiguration = headerConfiguration(for: cell, with: title)
-            case (.view, _):
-                cell.contentConfiguration = defaultConfiguration(for: cell, at: row)
-            case (.title, .editableText(let title)):
-                cell.contentConfiguration = titleConfiguration(for: cell, with: title)
-            case (.date, .editableDate(let date)):
-                cell.contentConfiguration = dateConfiguration(for: cell, with: date)
-            case (.notes, .editableText(let notes)):
-                cell.contentConfiguration = notesConfiguration(for: cell, with: notes)
-            default:
-                fatalError("Unexpected combination of section and row.")
-            }
-            cell.tintColor = .todayPrimaryTint
+        let section = section(for: indexPath)
+        switch (section, row) {
+        case (_, .header(let title)):
+            cell.contentConfiguration = headerConfiguration(for: cell, with: title)
+        case (.view, _):
+            cell.contentConfiguration = defaultConfiguration(for: cell, at: row)
+        case (.title, .editableText(let title)):
+            cell.contentConfiguration = titleConfiguration(for: cell, with: title)
+        case (.date, .editableDate(let date)):
+            cell.contentConfiguration = dateConfiguration(for: cell, with: date)
+        case (.notes, .editableText(let notes)):
+            cell.contentConfiguration = notesConfiguration(for: cell, with: notes)
+        default:
+            fatalError("Unexpected combination of section and row.")
         }
-    
+        cell.tintColor = .todayPrimaryTint
+    }
+
+    @objc func didCancelEdit() {
+        workingReminder = reminder
+        setEditing(false, animated: true)
+    }
+
     private func prepareForEditing() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .cancel, target: self, action: #selector(didCancelEdit))
         updateSnapshotForEditing()
-        }
+    }
 
     private func updateSnapshotForEditing() {
         var snapshot = Snapshot()
@@ -85,20 +101,14 @@ class ReminderViewController: UICollectionViewController {
             [.header(Section.notes.name), .editableText(reminder.notes ?? "")], toSection: .notes)
         dataSource.apply(snapshot)
     }
-    
-    @objc func didCancelEdit() {
-        workingReminder = reminder
-        setEditing(false, animated: true)
-        }
-    
+
     private func prepareForViewing() {
         navigationItem.leftBarButtonItem = nil
         if workingReminder != reminder {
             reminder = workingReminder
         }
-            updateSnapshotForViewing()
+        updateSnapshotForViewing()
     }
-
 
     private func updateSnapshotForViewing() {
         var snapshot = Snapshot()

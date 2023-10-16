@@ -25,7 +25,7 @@ extension ReminderViewController {
         {
             var contentConfiguration = cell.textFieldConfiguration()
                 contentConfiguration.text = title
-            contentConfiguration.onChange = { [weak self] title in
+                contentConfiguration.onChange = { [weak self] title in
                 self?.workingReminder.title = title
             }
             return contentConfiguration
