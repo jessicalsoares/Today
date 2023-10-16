@@ -10,14 +10,13 @@ import UIKit
 
 class TextViewContentView: UIView, UIContentView {
     struct Configuration: UIContentConfiguration {
-            var text: String? = ""
-
+        var text: String? = ""
+        var onChange: (String) -> Void = { _ in }
 
             func makeContentView() -> UIView & UIContentView {
                 return TextViewContentView(self)
             }
         }
-
 
         let textView = UITextView()
         var configuration: UIContentConfiguration {
@@ -35,14 +34,13 @@ class TextViewContentView: UIView, UIContentView {
             super.init(frame: .zero)
             addPinnedSubview(textView, height: 200)
             textView.backgroundColor = nil
+            textView.delegate = self
             textView.font = UIFont.preferredFont(forTextStyle: .body)
         }
-
 
         required init?(coder: NSCoder) {
             fatalError("init(coder:) has not been implemented")
         }
-
 
         func configure(configuration: UIContentConfiguration) {
             guard let configuration = configuration as? Configuration else { return }
@@ -50,10 +48,16 @@ class TextViewContentView: UIView, UIContentView {
         }
     }
 
-
     extension UICollectionViewListCell {
         func textViewConfiguration() -> TextViewContentView.Configuration {
             TextViewContentView.Configuration()
         }
     }
+
+extension TextViewContentView: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        guard let configuration = configuration as? TextViewContentView.Configuration else { return }
+        configuration.onChange(textView.text)
+        }
+}
 
