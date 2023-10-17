@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B50250DD2ADD84EF00A84FBD /* ReminderListStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B50250DC2ADD84EF00A84FBD /* ReminderListStyle.swift */; };
 		B55517042AD8371800D54866 /* ReminderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55517032AD8371800D54866 /* ReminderViewController.swift */; };
 		B55517072AD8391700D54866 /* ReminderViewController+Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55517062AD8391700D54866 /* ReminderViewController+Row.swift */; };
 		B56AECB42AD6EAC0004B555A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B56AECB32AD6EAC0004B555A /* AppDelegate.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B50250DC2ADD84EF00A84FBD /* ReminderListStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderListStyle.swift; sourceTree = "<group>"; };
 		B55517032AD8371800D54866 /* ReminderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderViewController.swift; sourceTree = "<group>"; };
 		B55517062AD8391700D54866 /* ReminderViewController+Row.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ReminderViewController+Row.swift"; sourceTree = "<group>"; };
 		B56AECB02AD6EAC0004B555A /* Today.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Today.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +176,7 @@
 			children = (
 				B56AECE42AD6EF05004B555A /* Reminder.swift */,
 				B56AECE62AD6F1BF004B555A /* Date+Today.swift */,
+				B50250DC2ADD84EF00A84FBD /* ReminderListStyle.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				B56BEB322AD952300069E29E /* UIContentConfiguration+Stateless.swift in Sources */,
 				B56BEB292AD9325A0069E29E /* ReminderViewController+Section.swift in Sources */,
 				B56AECB62AD6EAC0004B555A /* SceneDelegate.swift in Sources */,
+				B50250DD2ADD84EF00A84FBD /* ReminderListStyle.swift in Sources */,
 				B55517042AD8371800D54866 /* ReminderViewController.swift in Sources */,
 				B56BEB2E2AD94D650069E29E /* UIView+PinnedSubview.swift in Sources */,
 				B56BEB342AD97FAC0069E29E /* TextViewContentView.swift in Sources */,
