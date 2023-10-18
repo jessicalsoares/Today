@@ -27,11 +27,11 @@ enum ReminderListStyle: Int {
         let isInToday = Locale.current.calendar.isDateInToday(date)
         switch self {
         case .today:
-        return isInToday
+            return isInToday
         case .future:
-        return (date > Date.now) && !isInToday
+            return (date > Date.now) && !isInToday
         case .all:
-        return true
+            return true
         }
     }
 }

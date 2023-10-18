@@ -16,22 +16,22 @@ class TextFieldContentView: UIView, UIContentView {
         
         func makeContentView() -> UIView & UIContentView {
             return TextFieldContentView(self)
-            }
         }
+    }
     
     let textField = UITextField()
     var configuration: UIContentConfiguration {
-            didSet {
-                configure(configuration: configuration)
-            }
+        didSet {
+            configure(configuration: configuration)
         }
-
-
+    }
+    
+    
     override var intrinsicContentSize: CGSize {
         CGSize(width: 0, height: 44)
     }
-
-
+    
+    
     init(_ configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)
@@ -39,8 +39,8 @@ class TextFieldContentView: UIView, UIContentView {
         textField.addTarget(self, action: #selector(didChange(_:)), for: .editingChanged)
         textField.clearButtonMode = .whileEditing
     }
-
-
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -48,16 +48,16 @@ class TextFieldContentView: UIView, UIContentView {
     func configure(configuration: UIContentConfiguration) {
         guard let configuration = configuration as? Configuration else { return }
         textField.text = configuration.text
-        }
+    }
     
     @objc private func didChange(_ sender: UITextField) {
         guard let configuration = configuration as? TextFieldContentView.Configuration else { return }
         configuration.onChange(textField.text ?? "")
-        }
+    }
 }
 
 extension UICollectionViewListCell {
     func textFieldConfiguration() -> TextFieldContentView.Configuration {
-            TextFieldContentView.Configuration()
-        }
+        TextFieldContentView.Configuration()
+    }
 }
