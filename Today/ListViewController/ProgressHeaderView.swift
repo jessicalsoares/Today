@@ -57,6 +57,7 @@ class ProgressHeaderView: UICollectionReusableView {
         lowerView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
 
+        heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1).isActive = true
         containerView.heightAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1)
             .isActive = true
 
@@ -83,3 +84,4 @@ class ProgressHeaderView: UICollectionReusableView {
         lowerView.backgroundColor = .todayProgressLowerBackground
     }
 }
+

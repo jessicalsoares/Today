@@ -28,7 +28,6 @@ class TextViewContentView: UIView, UIContentView {
         CGSize(width: 0, height: 44)
     }
     
-    
     init(_ configuration: UIContentConfiguration) {
         self.configuration = configuration
         super.init(frame: .zero)

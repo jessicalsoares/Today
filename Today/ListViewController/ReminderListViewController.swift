@@ -3,7 +3,7 @@ import UIKit
 
 class ReminderListViewController: UICollectionViewController {
     var dataSource: DataSource!
-    var reminders: [Reminder] = []
+    var reminders: [Reminder] = Reminder.sampleData
     var listStyle: ReminderListStyle = .today
     var filteredReminders: [Reminder] {
         return reminders.filter { listStyle.shouldInclude(date: $0.dueDate) }.sorted {
@@ -22,65 +22,62 @@ class ReminderListViewController: UICollectionViewController {
         }
         return progress
     }
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
+
         collectionView.backgroundColor = .todayGradientFutureBegin
-        
-        
+
+
         let listLayout = listLayout()
         collectionView.collectionViewLayout = listLayout
-        
-        
+
+
         let cellRegistration = UICollectionView.CellRegistration(handler: cellRegistrationHandler)
-        
-        
+
+
         dataSource = DataSource(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, itemIdentifier: Reminder.ID) in
             return collectionView.dequeueConfiguredReusableCell(
                 using: cellRegistration, for: indexPath, item: itemIdentifier)
         }
-        
-        
+
+
         let headerRegistration = UICollectionView.SupplementaryRegistration(
             elementKind: ProgressHeaderView.elementKind, handler: supplementaryRegistrationHandler)
         dataSource.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
             return self.collectionView.dequeueConfiguredReusableSupplementary(
                 using: headerRegistration, for: indexPath)
         }
-        
-        
+
+
         let addButton = UIBarButtonItem(
             barButtonSystemItem: .add, target: self, action: #selector(didPressAddButton(_:)))
         addButton.accessibilityLabel = NSLocalizedString(
             "Add reminder", comment: "Add button accessibility label")
         navigationItem.rightBarButtonItem = addButton
-        
-        
+
+
         listStyleSegmentedControl.selectedSegmentIndex = listStyle.rawValue
         listStyleSegmentedControl.addTarget(
             self, action: #selector(didChangeListStyle(_:)), for: .valueChanged)
         navigationItem.titleView = listStyleSegmentedControl
-        
-        
+
+
         if #available(iOS 16, *) {
             navigationItem.style = .navigator
         }
-        
-        
+
+
         updateSnapshot()
-        
-        
+
+
         collectionView.dataSource = dataSource
-        
-        
-        prepareReminderStore()
     }
-    
-    
+
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshBackground()
@@ -92,8 +89,8 @@ class ReminderListViewController: UICollectionViewController {
         pushDetailViewForReminder(withId: id)
         return false
     }
-    
-    
+
+
     override func collectionView(
         _ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView,
         forElementKind elementKind: String, at indexPath: IndexPath
@@ -105,8 +102,8 @@ class ReminderListViewController: UICollectionViewController {
         }
         progressView.progress = progress
     }
-    
-    
+
+
     func refreshBackground() {
         collectionView.backgroundView = nil
         let backgroundView = UIView()
@@ -114,8 +111,8 @@ class ReminderListViewController: UICollectionViewController {
         backgroundView.layer.addSublayer(gradientLayer)
         collectionView.backgroundView = backgroundView
     }
-    
-    
+
+
     func pushDetailViewForReminder(withId id: Reminder.ID) {
         let reminder = reminder(withId: id)
         let viewController = ReminderViewController(reminder: reminder) { [weak self] reminder in
@@ -124,23 +121,7 @@ class ReminderListViewController: UICollectionViewController {
         }
         navigationController?.pushViewController(viewController, animated: true)
     }
-    
-    
-    func showError(_ error: Error) {
-        let alertTitle = NSLocalizedString("Error", comment: "Error alert title")
-        let alert = UIAlertController(
-            title: alertTitle, message: error.localizedDescription, preferredStyle: .alert)
-        let actionTitle = NSLocalizedString("OK", comment: "Alert OK button title")
-        alert.addAction(
-            UIAlertAction(
-                title: actionTitle, style: .default,
-                handler: { [weak self] _ in
-                    self?.dismiss(animated: true)
-                }))
-        present(alert, animated: true, completion: nil)
-    }
-    
-    
+
     private func listLayout() -> UICollectionViewCompositionalLayout {
         var listConfiguration = UICollectionLayoutListConfiguration(appearance: .grouped)
         listConfiguration.headerMode = .supplementary
@@ -149,8 +130,8 @@ class ReminderListViewController: UICollectionViewController {
         listConfiguration.backgroundColor = .clear
         return UICollectionViewCompositionalLayout.list(using: listConfiguration)
     }
-    
-    
+
+
     private func makeSwipeActions(for indexPath: IndexPath?) -> UISwipeActionsConfiguration? {
         guard let indexPath = indexPath, let id = dataSource.itemIdentifier(for: indexPath) else {
             return nil
@@ -164,13 +145,13 @@ class ReminderListViewController: UICollectionViewController {
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
-    
+
+
     private func supplementaryRegistrationHandler(
         progressView: ProgressHeaderView, elementKind: String, indexPath: IndexPath
     ) {
         headerView = progressView
     }
-    
-    
+
+
 }
