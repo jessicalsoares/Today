@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 extension ReminderListViewController {
     @objc func didPressDoneButton(_ sender: ReminderDoneButton) {
         guard let id = sender.id else { return }
@@ -30,7 +29,6 @@ extension ReminderListViewController {
         let navigationController = UINavigationController(rootViewController: viewController)
         present(navigationController, animated: true)
     }
-    
     
     @objc func didCancelAdd(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
